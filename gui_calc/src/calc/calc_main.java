@@ -5,11 +5,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class calc_main extends JFrame {
+public class calc_main extends JFrame implements ActionListener {
     private JPanel top = new JPanel();
     private JPanel bottom = new JPanel();
 
     private JButton[] num_button = new JButton[10];
+
+    private JButton add_button = new JButton("＋");
+    private JButton sub_button = new JButton("－");
+    private JButton mul_button = new JButton("×");
+    private JButton div_button = new JButton("÷");
+    private JButton eql_button = new JButton("＝");
+    private JButton cle_button = new JButton("CE");
 
     private TextField textField = new TextField(18);
 
@@ -38,12 +45,52 @@ public class calc_main extends JFrame {
         top.add(textField);
 
         bottom.setLayout(new GridLayout(4, 4, 5, 5));
+
+        for(int i = 0; i < 10; i++){
+            num_button[i] = new JButton(Integer.toString(i));
+            num_button[i].setFont(font);
+        }
+
+        bottom.add(num_button[1]);
+        bottom.add(num_button[2]);
+        bottom.add(num_button[3]);
+        bottom.add(div_button);
+
+        bottom.add(num_button[4]);
+        bottom.add(num_button[5]);
+        bottom.add(num_button[6]);
+        bottom.add(mul_button);
+
+        bottom.add(num_button[7]);
+        bottom.add(num_button[8]);
+        bottom.add(num_button[9]);
+        bottom.add(sub_button);
+
+        bottom.add(num_button[0]);
+        bottom.add(cle_button);
+        bottom.add(eql_button);
+        bottom.add(add_button);
+
         bottom.setBackground(Color.cyan);
     }
 
-    public void eventHandler() {}
+    public void eventHandler() {
+        for(int i = 0; i < 10; i++){
+            num_button[i].addActionListener(this);
+        }
+        add_button.addActionListener(this);
+        sub_button.addActionListener(this);
+        mul_button.addActionListener(this);
+        div_button.addActionListener(this);
+        eql_button.addActionListener(this);
+        cle_button.addActionListener(this);
+    }
 
     public static void main(String[] args) {
         new calc_main();
+    }
+
+    public void actionPerformed(ActionEvent e){
+
     }
 }
