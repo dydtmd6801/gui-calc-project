@@ -18,9 +18,10 @@ public class calc_main extends JFrame implements ActionListener {
     private JButton eql_button = new JButton("＝");
     private JButton cle_button = new JButton("CE");
 
-    private TextField textField = new TextField(18);
+    private TextField textField = new TextField(11);
 
-    private Font font = new Font("Noto sans KR",Font.BOLD,16);
+    private Font font = new Font("Noto sans KR",Font.BOLD,30);
+    private Font btn_font = new Font("Noto sans KR", Font.PLAIN, 16);
 
     calc_main(){
         this.setTitle("계산기");
@@ -44,12 +45,18 @@ public class calc_main extends JFrame implements ActionListener {
         textField.setSize(200, 80);
         top.add(textField);
 
-        bottom.setLayout(new GridLayout(4, 4, 5, 5));
+        bottom.setLayout(new GridLayout(4, 4, 2, 2));
 
         for(int i = 0; i < 10; i++){
             num_button[i] = new JButton(Integer.toString(i));
-            num_button[i].setFont(font);
+            num_button[i].setFont(btn_font);
         }
+        add_button.setFont(btn_font);
+        sub_button.setFont(btn_font);
+        mul_button.setFont(btn_font);
+        div_button.setFont(btn_font);
+        eql_button.setFont(btn_font);
+        cle_button.setFont(btn_font);
 
         bottom.add(num_button[1]);
         bottom.add(num_button[2]);
@@ -71,7 +78,7 @@ public class calc_main extends JFrame implements ActionListener {
         bottom.add(eql_button);
         bottom.add(add_button);
 
-        bottom.setBackground(Color.cyan);
+        bottom.setBackground(Color.lightGray);
     }
 
     public void eventHandler() {
