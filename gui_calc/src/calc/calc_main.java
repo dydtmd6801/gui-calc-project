@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 public class calc_main extends JFrame implements ActionListener {
     private JPanel top = new JPanel();
     private JPanel bottom = new JPanel();
+    private JPanel operation = new JPanel();
+
+    private JLabel operate = new JLabel("0");
 
     private JButton[] num_button = new JButton[10];
 
@@ -21,7 +24,7 @@ public class calc_main extends JFrame implements ActionListener {
     private TextField textField = new TextField(11);
 
     private Font font = new Font("Noto sans KR",Font.BOLD,30);
-    private Font btn_font = new Font("Noto sans KR", Font.PLAIN, 16);
+    private Font btn_font = new Font("Noto sans KR", Font.PLAIN, 14);
 
     calc_main(){
         this.setTitle("계산기");
@@ -37,10 +40,12 @@ public class calc_main extends JFrame implements ActionListener {
 
         this.add(top, BorderLayout.NORTH);
         this.add(bottom, BorderLayout.CENTER);
+        this.add(operation, BorderLayout.SOUTH);
+
+        operation.add(operate);
 
         top.setLayout(new FlowLayout());
 
-        textField.setText("0");
         textField.setFont(font);
         textField.setSize(200, 80);
         top.add(textField);
@@ -98,6 +103,49 @@ public class calc_main extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
+        String last_num = operate.getText().substring(operate.getText().length() - 1);
 
+        for(int i = 0; i < 10; i++){
+            if(e.getSource() == num_button[i]){
+                switch(last_num){
+                    case "0":
+                    case "1":
+                    case "2":
+                    case "3":
+                    case "4":
+                    case "5":
+                    case "6":
+                    case "7":
+                    case "8":
+                    case "9":
+                        textField.setText(textField.getText()+i);
+                        break;
+                    default:
+                        textField.setText(""+i);
+                        break;
+                }
+                if(operate.getText() == "0"){
+                    operate.setText(""+i);
+                } else {
+                    operate.setText(operate.getText()+i);
+                }
+            }
+        }
+        if(e.getSource() == add_button){
+            textField.setText("＋");
+            operate.setText(operate.getText()+"＋");
+        }
+        if(e.getSource() == sub_button){
+            textField.setText("－");
+            operate.setText(operate.getText()+"－");
+        }
+        if(e.getSource() == mul_button){
+            textField.setText("×");
+            operate.setText(operate.getText()+"×");
+        }
+        if(e.getSource() == div_button){
+            textField.setText("÷");
+            operate.setText(operate.getText()+"÷");
+        }
     }
 }
