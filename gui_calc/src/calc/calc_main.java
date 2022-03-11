@@ -11,6 +11,7 @@ public class calc_main extends JFrame implements ActionListener {
     private JPanel operation = new JPanel();
 
     private JLabel operate = new JLabel("0");
+    private JLabel calc = new JLabel("");
 
     private JButton[] num_button = new JButton[10];
 
@@ -33,6 +34,7 @@ public class calc_main extends JFrame implements ActionListener {
         this.eventHandler();
         this.setSize( 300, 400);
         this.setVisible(true);
+        this.setLocationRelativeTo(null);
     }
 
     public void formDesign() {
@@ -103,10 +105,10 @@ public class calc_main extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
-        String last_num = operate.getText().substring(operate.getText().length() - 1);
 
         for(int i = 0; i < 10; i++){
             if(e.getSource() == num_button[i]){
+                String last_num = operate.getText().substring(operate.getText().length() - 1);
                 switch(last_num){
                     case "0":
                     case "1":
@@ -134,18 +136,60 @@ public class calc_main extends JFrame implements ActionListener {
         if(e.getSource() == add_button){
             textField.setText("＋");
             operate.setText(operate.getText()+"＋");
+            calc.setText("＋");
         }
         if(e.getSource() == sub_button){
             textField.setText("－");
             operate.setText(operate.getText()+"－");
+            calc.setText("－");
         }
         if(e.getSource() == mul_button){
             textField.setText("×");
             operate.setText(operate.getText()+"×");
+            calc.setText("×");
         }
         if(e.getSource() == div_button){
             textField.setText("÷");
             operate.setText(operate.getText()+"÷");
+            calc.setText("÷");
+        }
+        if(e.getSource() == cle_button){
+            textField.setText("");
+            operate.setText("0");
+        }
+        if(e.getSource() == eql_button){
+            if(calc.getText() == "＋"){
+                String[] array = operate.getText().split("＋");
+                int front_num = Integer.parseInt(array[0]);
+                int back_num = Integer.parseInt(array[1]);
+                JOptionPane.showMessageDialog(null, front_num + back_num,"result", JOptionPane.PLAIN_MESSAGE);
+                textField.setText("");
+                operate.setText("0");
+            }
+            if(calc.getText() == "－"){
+                String[] array = operate.getText().split("－");
+                int front_num = Integer.parseInt(array[0]);
+                int back_num = Integer.parseInt(array[1]);
+                JOptionPane.showMessageDialog(null, front_num - back_num,"result", JOptionPane.PLAIN_MESSAGE);
+                textField.setText("");
+                operate.setText("0");
+            }
+            if(calc.getText() == "×"){
+                String[] array = operate.getText().split("×");
+                int front_num = Integer.parseInt(array[0]);
+                int back_num = Integer.parseInt(array[1]);
+                JOptionPane.showMessageDialog(null, front_num * back_num,"result", JOptionPane.PLAIN_MESSAGE);
+                textField.setText("");
+                operate.setText("0");
+            }
+            if(calc.getText() == "÷"){
+                String[] array = operate.getText().split("÷");
+                int front_num = Integer.parseInt(array[0]);
+                int back_num = Integer.parseInt(array[1]);
+                JOptionPane.showMessageDialog(null, front_num / back_num,"result", JOptionPane.PLAIN_MESSAGE);
+                textField.setText("");
+                operate.setText("0");
+            }
         }
     }
 }
